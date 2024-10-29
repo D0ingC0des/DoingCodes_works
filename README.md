@@ -92,8 +92,6 @@ O uso do S.C.P.E. é regido pelos seguintes termos:
 - **Adições de Conteúdo**: Qualquer adição de conteúdo ao programa pode ser feita sob solicitação, porém, está sujeita a custos adicionais. Os detalhes sobre esses custos estão disponíveis mediante consulta.
 - **Suporte**: Durante o período de licença, suporte técnico está disponível. Detalhes sobre o suporte oferecido podem ser encontrados na documentação de suporte.
 
-Para mais informações sobre a licença e suas condições, entre em contato conosco através do [e-mail de suporte](mailto:suporte@seu-email.com).
-
 ---
 
 Desenvolvido com por [Doing Codes](https://github.com/D0ingC0des)
