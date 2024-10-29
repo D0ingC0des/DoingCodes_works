@@ -95,3 +95,10 @@ O uso do S.C.P.E. é regido pelos seguintes termos:
 ---
 
 Desenvolvido com por [Doing Codes](https://github.com/D0ingC0des)
+Experimente o [S.C.P.E. ](https://scpe-web-v2.rf.gd/) *Recomendamos EDGE para melhor aproveitar o sistema*
+*Log-in: root_adm*
+*Senha: 5231*
+
+## ATENÇÂO
+
+*O site do S.C.P.E. foi disponibilizado em versão de teste. O site com todas as funções é fornecido ao condomínio que contrar o serviço.*
