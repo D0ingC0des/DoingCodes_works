@@ -102,6 +102,6 @@ Experimente o [S.C.P.E. ](https://scpe-web-v2.rf.gd/) *Recomendamos EDGE para me
 
 *Senha: 5231*
 
-## ATENÇÂO
+## ATENÇÃO
 
 *O site do S.C.P.E. foi disponibilizado em versão de teste. O site com todas as funções é fornecido ao condomínio que contrar o serviço.*
