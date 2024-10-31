@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta content="pt-br" http-equiv="Content-Language" />
+<meta charset="utf-8" />
+<title>SCPE-wb - Bem vindo ao sistema de controle de portaria e encomendas</title>
+<style type="text/css">
+.auto-style1 {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.auto-style2 {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: small;
+}
+input, select, textarea {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	color: #000000;
+	background-color: #FFFFFF;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #363636;
+	padding: 0px;
+	margin: 0px;
+}
+.div-especial {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: 10px;
+	font-weight: normal;
+	font-style: italic;
+	color: #000000;
+	vertical-align: text-bottom;
+	text-align: justify;
+	background-color: #F2F2F2;
+	border: thin dotted #808080;
+	padding: 1px;
+	margin: 0px;
+}
+</style>
+</head>
+
+<body bgcolor="#363636" style="margin: 1px; background-color: #FFFFFF" xml:lang="pt-br">
+<form action="forbidden.html" method="post">
+<table align="center" bgcolor="#FFFFFF" border="0" cellpadding="0" cellspacing="0" width="800">
+	<tr>
+		<td align="center">
+		<img alt="Maison Porto Fino" border="0" height="247" src="imagem/vista_cond.jpg" width="370" /></td>
+	</tr>
+	<tr>
+		<td align="center" class="auto-style1" height="80" valign="middle">Bem 
+		vindo ao sistema de <strong>controle de portaria e encomendas</strong></td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td align="justify" class="auto-style2">O acesso a esse sistema é 
+		restrito, por favor, identifique-se através de log-in!</td>
+	</tr>
+	<tr>
+		<td align="left" class="auto-style2" valign="bottom" height="40">Log-in:&nbsp;<input name="Text1" type="text" />
+		</td>
+	</tr>
+	<tr>
+		<td class="auto-style2" height="40" valign="bottom">Senha:&nbsp;<input name="Text2" type="password" />
+		</td>
+	</tr>
+	<tr>
+		<td align="center" height="60" valign="middle"><button value="Logar no sistema">Logar no sistema</button></td>
+	</tr>
+</table>
+</form>
+<div style="height:200px">&nbsp;</div>
+<div class="div-especial">
+	Intra-site desenvolvido por Kyocerah(W26R10VN78)<br />
+	Todos os direitos reservados.<br />
+	Os dados contidos neste sistema são de propriedade de: Cond. Maison Porto 
+	Fino.<br />
+	A divulgação, cópia, extravio, ou, qualquer ação que possa causar vazamento 
+	de informação é CRIME!
+</div>
+
+</body>
+
+</html>

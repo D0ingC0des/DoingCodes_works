@@ -1,0 +1,163 @@
+﻿<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Leitor de QR code</title>
+  <style>
+    #qr-video {
+      width: 300px;
+      height: 300px;
+    }
+    #qr-canvas {
+      display: none;
+    }
+    #qr-result {
+      font-size: 20px;
+      color: green;
+    }
+  </style>
+<script type="text/javascript" src="Scripts/jsqr-1.0.2-min.js"></script>
+<script type="text/javascript">
+// Importar as bibliotecas necessárias
+const qr = require('qr-image');
+const QrCode = require('qrcode-reader');
+const Jimp = require('jimp');
+
+// Criar um servidor HTTP para servir o código HTML
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
+
+// Criar um servidor HTTP na porta 3000
+http.createServer((req, res) => {
+  // Verificar se o caminho da requisição é /qr
+  if (req.url === '/qr') {
+    // Ler o corpo da requisição como um buffer
+    let body = [];
+    req.on('data', (chunk) => {
+      body.push(chunk);
+    }).on('end', () => {
+      // Converter o buffer em uma imagem Jimp
+      body = Buffer.concat(body);
+      Jimp.read(body, (err, image) => {
+        // Verificar se houve algum erro
+        if (err) {
+          // Enviar uma resposta de erro
+          res.writeHead(500, {'Content-Type': 'text/plain'});
+          res.end('Erro ao ler a imagem');
+        } else {
+          // Criar um leitor de QR code
+          let qr = new QrCode();
+          // Ler o QR code da imagem
+          qr.callback = (err, value) => {
+            // Verificar se houve algum erro
+            if (err) {
+              // Enviar uma resposta de erro
+              res.writeHead(500, {'Content-Type': 'text/plain'});
+              res.end('Erro ao ler o QR code');
+            } else {
+              // Enviar uma resposta com o valor do QR code
+              res.writeHead(200, {'Content-Type': 'text/plain'});
+              res.end(value.result);
+            }
+          };
+          qr.decode(image.bitmap);
+        }
+      });
+    });
+  } else {
+    // Servir o código HTML estático
+    let filePath = path.join(__dirname, 'index.html');
+    fs.readFile(filePath, (err, data) => {
+      // Verificar se houve algum erro
+      if (err) {
+        // Enviar uma resposta de erro
+        res.writeHead(404, {'Content-Type': 'text/plain'});
+        res.end('Arquivo não encontrado');
+      } else {
+        // Enviar uma resposta com o código HTML
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.end(data);
+      }
+    });
+  }
+}).listen(3000);
+
+
+
+
+// Exibir uma mensagem no console
+console.log('Servidor rodando na porta 3000');
+</script>
+</head>
+<body>
+  <h1>Leitor de QR code</h1>
+  <div>
+    <video id="qr-video" autoplay></video>
+    <canvas id="qr-canvas"></canvas>
+  </div>
+  <div>
+    <b>QR code lido: </b>
+    <span id="qr-result">Nenhum</span>
+  </div>
+  <script>
+    // Obter os elementos do DOM
+    const video = document.getElementById('qr-video');
+    const canvas = document.getElementById('qr-canvas');
+    const result = document.getElementById('qr-result');
+
+    // Obter o contexto do canvas
+    const context = canvas.getContext('2d');
+
+    // Definir as dimensões do canvas
+    canvas.width = 300;
+    canvas.height = 300;
+
+    // Obter o acesso à webcam
+    navigator.mediaDevices.getUserMedia({video: true})
+      .then((stream) => {
+        // Atribuir o stream ao elemento de vídeo
+        video.srcObject = stream;
+        // Iniciar um loop para capturar e enviar as imagens da webcam
+        setInterval(captureAndSend, 1000);
+      })
+      .catch((err) => {
+        // Exibir uma mensagem de erro
+        alert('Erro ao acessar a webcam: ' + err.message);
+      });
+
+    // Definir uma função para capturar e enviar as imagens da webcam
+    function captureAndSend() {
+  // Desenhar a imagem da webcam no canvas
+  context.drawImage(video, 0, 0, 300, 300);
+  // Obter os dados do canvas como um blob
+  canvas.toBlob((blob) => {
+    // Converter o blob em uma imagem Jimp
+    Jimp.read(blob).then((image) => {
+      // Criar um objeto XMLHttpRequest para enviar a imagem
+      let xhr = new XMLHttpRequest();
+      // Definir o método, a URL e o tipo de resposta
+      xhr.open('POST', '/qr');
+      xhr.responseType = 'text';
+      // Definir uma função para tratar a resposta
+      xhr.onload = () => {
+        // Verificar se o status é 200 (OK)
+        if (xhr.status === 200) {
+          // Atualizar o elemento de resultado com o valor do QR code
+          result.textContent = xhr.response;
+        } else {
+          // Exibir uma mensagem de erro
+          alert('Erro ao enviar a imagem: ' + xhr.statusText);
+        }
+      };
+      // Enviar a imagem
+      xhr.send(image.bitmap.data);
+    }).catch((err) => {
+      // Exibir uma mensagem de erro
+      alert('Erro ao converter a imagem: ' + err.message);
+    });
+  });
+}
+  </script>
+  
+</body>
+</html>

@@ -1,0 +1,79 @@
+<style type="text/css">
+    /* Estilos para a tabela */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Estilos para o cabeçalho da tabela */
+    .th {
+        background-color: #f2f2f2;
+        color: #333;
+        font-weight: bold;
+        padding: 10px;
+        text-align: left;
+    }
+
+    /* Estilos para as células da tabela */
+    .td {
+        padding: 10px;
+        text-align: left;
+    }
+
+    /* Estilos para as linhas da tabela */
+    .tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .tr:nth-child(odd) {
+        background-color: #e6e6e6;
+    }
+</style>
+
+<script type="text/javascript">
+    fetch('_scripts/_publica_scripts/_json/codigoIfood.json')
+        .then(response => response.json())
+        .then(data => {
+            // Ordena os dados pelo campo 'apto' em ordem numérica crescente
+            data.sort((a, b) => a.apto - b.apto);
+
+            // Agora que temos os dados, vamos criar a tabela
+
+            // Cria a tabela e o cabeçalho
+            let table = document.createElement('table');
+            let header = table.createTHead();
+            let headerRow = header.insertRow(0);
+            headerRow.innerHTML = "<th colspan='3'>SCPE-web - Lista de códigos IFood fora do sistema principal</th>";
+
+            // Cria as colunas
+            let row = header.insertRow(1);
+            row.innerHTML = "<th>Apto</th><th>Nome</th><th>Código Ifood</th>";
+
+            // Insere os dados nas linhas da tabela
+            let i = 0;
+            for (let item of data) {
+                let row = table.insertRow(-1);
+                row.style.backgroundColor = i % 2 === 0 ? '#e6e6e6' : '#f2f2f2';  // Alterna as cores das linhas
+
+                // Adiciona um evento de mouseover à linha
+                row.onmouseover = function () {
+                    this.style.backgroundColor = '#d9d9d9';
+                };
+
+                // Adiciona um evento de mouseout à linha
+                row.onmouseout = function () {
+                    this.style.backgroundColor = i % 2 === 0 ? '#e6e6e6' : '#f2f2f2';
+                };
+
+                row.insertCell(0).innerHTML = item.apto;
+                row.insertCell(1).innerHTML = item.nome;
+                row.insertCell(2).innerHTML = item.codigoIfood;
+                i++;
+            }
+
+            // Adiciona a tabela ao corpo do documento
+            document.body.appendChild(table);
+        })
+        .catch(error => console.error('Erro:', error));
+</script>
